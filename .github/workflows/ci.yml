@@ -20,10 +20,10 @@ jobs:
         dotnet-version: '9.0.x'
         
     - name: Restaurar dependências
-      run: dotnet restore
+      run: dotnet restore src/UnitTestingTutorial.slnx
       
     - name: Compilar o projeto
-      run: dotnet build --no-restore
+      run: dotnet build src/UnitTestingTutorial.slnx --no-restore
       
     - name: Rodar os testes
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test src/UnitTestingTutorial.slnx --no-build --verbosity normal
