@@ -30,16 +30,9 @@ public class WeatherService(IWeatherApiClient apiClient)
         return forecast.MaxBy(w => w.TemperatureCelsius);
     }
 
-    // public async Task<bool> IsFreezingAsync(string city)
-    // {
-    //     var data = await apiClient.GetWeatherAsync(city);
-    //     return data is not null && data.TemperatureCelsius <= 0;
-    // }
-    
-    // Código alterado propositalmente
     public async Task<bool> IsFreezingAsync(string city)
     {
         var data = await apiClient.GetWeatherAsync(city);
-        return data is not null && data.TemperatureCelsius > 0;
+        return data is not null && data.TemperatureCelsius <= 0;
     }
 }
