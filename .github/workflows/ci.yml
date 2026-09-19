@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+      
+    - name: Configurar o SDK do .NET 9
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restaurar dependências
+      run: dotnet restore
+      
+    - name: Compilar o projeto
+      run: dotnet build --no-restore
+      
+    - name: Rodar os testes
+      run: dotnet test --no-build --verbosity normal
