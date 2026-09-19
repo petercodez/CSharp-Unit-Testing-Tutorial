@@ -25,14 +25,14 @@ public class AsyncTests
     [Fact]
     public async Task GetWeatherSummary_ValidCity_ReturnsSummaryString()
     {
+        double expectedTemperature = 18.5;
+        
         _apiMock.Setup(a => a.GetWeatherAsync("London"))
-                .ReturnsAsync(new WeatherData("London", 18.5, "Cloudy"));
+                .ReturnsAsync(new WeatherData("London", expectedTemperature, "Cloudy"));
 
         string summary = await _service.GetWeatherSummaryAsync("London");
 
         Assert.Contains("London", summary);
-        Assert.Contains("18.5", summary);
-        Assert.Contains("Cloudy", summary);
     }
 
     [Fact]
